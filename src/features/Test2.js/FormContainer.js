@@ -1,180 +1,46 @@
 import { Button, DatePicker, Form, Input, Select, Radio } from "antd";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DataUser from "./DataUser";
+import useFromDataUser from "../../hooks/useFormDataUser";
+import InputName from "../../components/InputName";
 
 export default function FormContainer() {
-  // getting the values of local storage
-  const getFormDatas = () => {
-    const data = localStorage.getItem("formDatas");
-
-    if (data) {
-      return JSON.parse(data);
-    } else {
-      return [];
-    }
-  };
-
-  // main array
-  const [formDatas, setFormDatas] = useState(getFormDatas());
-  //   console.log("formDatas:", formDatas);
-
-  const [number1, setNumber1] = useState("");
-  const [number2, setNumber2] = useState("");
-  const [number3, setNumber3] = useState("");
-  const [number4, setNumber4] = useState("");
-  const [number5, setNumber5] = useState("");
-
-  // input field states
-  const [prefix, setPrefix] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [birthday, setBirthday] = useState("");
-  const [nationality, setNationality] = useState("");
-  const [cardId, setCardId] = useState("");
-  const [sex, setSex] = useState("");
-  const [mobileMumber, setMobileMumber] = useState("");
-  const [mobilePhoneNumber, setMobilePhoneNumber] = useState("");
-  const [passPort, setPassPort] = useState("");
-  const [salary, setSalary] = useState("");
-
-  const handleCardIdChange = () => {
-    const newCardId = `${number1}-${number2}-${number3}-${number4}-${number5}`;
-    setCardId(newCardId);
-  };
-
-  const handleNumber1Change = e => {
-    const value = e.target.value;
-    const regex = /^[0-9]*$/;
-
-    if (regex.test(value) && value.length <= 1) {
-      setNumber1(value);
-      handleCardIdChange();
-    }
-  };
-
-  const handleNumber2Change = e => {
-    const value = e.target.value;
-    const regex = /^[0-9]*$/;
-
-    if (regex.test(value) && value.length <= 3) {
-      setNumber2(value);
-      handleCardIdChange();
-    }
-  };
-
-  const handleNumber3Change = e => {
-    const value = e.target.value;
-    const regex = /^[0-9]*$/;
-
-    if (regex.test(value) && value.length <= 3) {
-      setNumber3(value);
-      handleCardIdChange();
-    }
-  };
-
-  const handleNumber4Change = e => {
-    const value = e.target.value;
-    const regex = /^[0-9]*$/;
-
-    if (regex.test(value) && value.length <= 3) {
-      setNumber4(value);
-      handleCardIdChange();
-    }
-  };
-
-  const handleNumber5Change = e => {
-    const value = e.target.value;
-    const regex = /^[0-9]*$/;
-
-    if (regex.test(value) && value.length <= 3) {
-      setNumber5(value);
-      handleCardIdChange();
-    }
-  };
-
-  // update local storage when formDatas change
-  useEffect(() => {
-    localStorage.setItem("formDatas", JSON.stringify(formDatas));
-  }, [formDatas]);
-
-  //form submit
-  const handleAddFormData = () => {
-    // เช็คว่าง user ใส่ข้อมูลครบไหม
-    // if (
-    //   prefix === "" ||
-    //   firstName === "" ||
-    //   lastName === "" ||
-    //   birthday === "" ||
-    //   nationality === "" ||
-    //   cardId === "" ||
-    //   sex === "" ||
-    //   mobileMumber === "" ||
-    //   mobilePhoneNumber === "" ||
-    //   passPort === "" ||
-    //   salary === ""
-    // ) {
-    //   alert("กรุณากรอกข้อมูลให้ครบถ้วน");
-    //   return;
-    // }
-
-    // create
-    let form = {
-      id: formDatas.length + 1,
-      prefix,
-      firstName,
-      lastName,
-      birthday,
-      nationality,
-      cardId,
-      sex: sex === "ชาย" ? "ชาย" : sex === "หญิง" ? "หญิง" : "ไม่ระบุ",
-      mobileMumber,
-      mobilePhoneNumber,
-      passPort,
-      salary
-    };
-
-    setFormDatas([...formDatas, form]);
-    setPrefix("");
-    setFirstName("");
-    setLastName("");
-    setBirthday("");
-    setNationality("");
-    setCardId("");
-    setSex("");
-    setMobileMumber("");
-    setMobilePhoneNumber("");
-    setPassPort("");
-    setSalary("");
-  };
-
-  // ล้างข้อมูล
-  const onClickClearForm = () => {
-    setPrefix("");
-    setFirstName("");
-    setLastName("");
-    setBirthday("");
-    setNationality("");
-    setCardId("");
-    setSex("");
-    setMobileMumber("");
-    setMobilePhoneNumber("");
-    setPassPort("");
-    setSalary("");
-  };
-
-  // delete book from LS
-  const deleteFormDatas = id => {
-    const filteredFormDatas = formDatas.filter(element => {
-      return element.id !== id;
-    });
-    setFormDatas(filteredFormDatas);
-  };
-
-  // Delet all
-  const deleteFormDatasAll = () => {
-    setFormDatas([]);
-  };
+  const {
+    handleAddFormData,
+    prefix,
+    setPrefix,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
+    birthday,
+    setBirthday,
+    nationality,
+    setNationality,
+    cardId,
+    setCardId,
+    sex,
+    setSex,
+    countryCode,
+    setCountryCode,
+    mobilePhoneNumber,
+    setMobilePhoneNumber,
+    passPort,
+    setPassPort,
+    salary,
+    setSalary,
+    number1,
+    number2,
+    number3,
+    number4,
+    number5,
+    handleNumber1Change,
+    handleNumber2Change,
+    handleNumber3Change,
+    handleNumber4Change,
+    handleNumber5Change,
+    onClickClearForm
+  } = useFromDataUser();
 
   return (
     <>
@@ -209,8 +75,7 @@ export default function FormContainer() {
 
             <div className="flex flex-grow gap-2">
               <Form.Item label="ชื่อจริง: ">
-                <Input
-                  className="w-full h-[35px] rounded-md"
+                <InputName
                   onChange={e => setFirstName(e.target.value)}
                   placeholder="ชื่อ"
                   value={firstName || undefined}
@@ -218,8 +83,7 @@ export default function FormContainer() {
               </Form.Item>
 
               <Form.Item label="นามสกุล: ">
-                <Input
-                  className="w-full h-[35px] rounded-md"
+                <InputName
                   onChange={e => setLastName(e.target.value)}
                   value={lastName || undefined}
                   placeholder="นามสกุล"
@@ -309,11 +173,13 @@ export default function FormContainer() {
               <div className="w-1/5">
                 <Select
                   style={{ width: "100%" }}
-                  onChange={value => setMobileMumber(value)}
-                  value={mobileMumber}
+                  onChange={value => setCountryCode(value)}
+                  value={countryCode}
                 >
-                  <Select.Option value="09">09</Select.Option>
-                  <Select.Option value="66">66</Select.Option>
+                  <Select.Option value="+11">+11</Select.Option>
+                  <Select.Option value="+22">+22</Select.Option>
+                  <Select.Option value="+33">+33</Select.Option>
+                  <Select.Option value="+66">+66</Select.Option>
                 </Select>
               </div>
 
@@ -377,19 +243,14 @@ export default function FormContainer() {
               <Link to="/">
                 <Button className="bg-white">หน้าหลัก</Button>
               </Link>
-              <Link to="/">
+              <Link to="/testFrontend1">
                 <Button className="bg-white">Test 1</Button>
               </Link>
             </div>
           </Form.Item>
         </div>
 
-        <DataUser
-          formDatas={formDatas}
-          deleteFormDatas={deleteFormDatas}
-          deleteFormDatasAll={deleteFormDatasAll}
-          setFormDatas={setFormDatas}
-        />
+        <DataUser />
       </div>
     </>
   );
