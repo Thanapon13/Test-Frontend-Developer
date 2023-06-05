@@ -1,9 +1,8 @@
-import { Button, Checkbox, Drawer, Form, Input, Select } from "antd";
-import { useState } from "react";
+import { Button, Checkbox } from "antd";
 import { GoFileDirectory } from "react-icons/go";
 import useEditFormData from "../../hooks/uerEditFormData";
 import EditDataUser from "../test2.js/EditDataUser";
-// import InputName from "../../components/InputName";
+import ReactPaginate from "react-paginate";
 
 export default function DataUser({}) {
   const {
@@ -19,6 +18,7 @@ export default function DataUser({}) {
     handleEditSubmit,
     open
   } = useEditFormData();
+
   return (
     <>
       <div className="w-[90%] flex flex-col gap-2 m-auto">
@@ -109,6 +109,15 @@ export default function DataUser({}) {
             </div>
           )}
         </div>
+
+        <ReactPaginate
+          className="flex items-center gap-3"
+          previousLabel={"previous"}
+          nextAriaLabel={"next"}
+          pageCount={10}
+          marginPagesDisplayed={5}
+          pageRangeDisplayed={3}
+        />
       </div>
 
       <EditDataUser

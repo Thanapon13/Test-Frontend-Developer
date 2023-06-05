@@ -13,7 +13,11 @@ const resources = {
       "Connect && API": "การเชื่อมต่อ API",
       "Test 3": "แบบทดสอบที่ 3",
       "Form && Table": "การจัดการหน้าฟอร์ม",
-      "Layout & Style": "การจัดการหน้าเว็บ"
+      "Layout & Style": "การจัดการหน้าเว็บ",
+      "Move Shape": "เปลี่ยนรูปแบบ",
+      "Move Position": "เปลี่ยนตำแหน่ง",
+      "Home Page": "กลับหน้าหลัก",
+      "Layout Form": "การจัดการหน้าฟอร์ม"
     }
   },
   en: {
@@ -24,7 +28,11 @@ const resources = {
       "Connect && API": "Connect && API",
       " Test 3": "Test 3",
       "Form && Table": "Form && Table",
-      "Layout & Style": "Layout & Style"
+      "Layout & Style": "Layout & Style",
+      "Move Shape": "Move Shape",
+      "Move Position": "Move Position",
+      "Home Page": "Home Page",
+      "Layout Form": "Layout Form"
     }
   }
 };

@@ -1,10 +1,13 @@
 import { Button, DatePicker, Form, Input, Select, Radio } from "antd";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import DataUser from "./DataUser";
 import useFromDataUser from "../../hooks/useFormDataUser";
 import InputName from "../../components/InputName";
+import Navbar from "../../components/Navbar";
 
 export default function FormContainer() {
+  const { t, i18n } = useTranslation();
   const {
     handleAddFormData,
     prefix,
@@ -42,12 +45,16 @@ export default function FormContainer() {
     onClickClearForm
   } = useFromDataUser();
 
+  const changeLanguage = language => {
+    i18n.changeLanguage(language);
+  };
+
   return (
     <>
       <div className="w-full flex justify-center items-start gap-4 flex-wrap rounded-xl mb-10">
         {/* Box Left All */}
         <div className="w-[15%] mt-10">
-          <h1 className="font-bold text-2xl">การจัดหน้าฟอร์ม</h1>
+          <h1 className="font-bold text-2xl">{t("Layout Form")}</h1>
         </div>
 
         {/* Box Center All */}
@@ -73,12 +80,13 @@ export default function FormContainer() {
               </Select>
             </Form.Item>
 
-            <div className="flex flex-grow gap-2">
+            <div className="flex flex-grow gap-2 ">
               <Form.Item label="ชื่อจริง: ">
                 <InputName
                   onChange={e => setFirstName(e.target.value)}
                   placeholder="ชื่อ"
                   value={firstName || undefined}
+                  style={{ width: "300px" }}
                 />
               </Form.Item>
 
@@ -87,6 +95,7 @@ export default function FormContainer() {
                   onChange={e => setLastName(e.target.value)}
                   value={lastName || undefined}
                   placeholder="นามสกุล"
+                  style={{ width: "300px" }}
                 />
               </Form.Item>
             </div>
@@ -231,13 +240,14 @@ export default function FormContainer() {
         {/* Box Left All */}
         <div className="w-[15%] mt-10 flex flex-col">
           <Form.Item className="ml-auto">
-            <Select
-              placeholder="เลือกภาษา"
-              options={[{ value: "Thai" }, { value: "English" }]}
-            >
-              <Select.Option value="Thai">Thai</Select.Option>
-              <Select.Option value="English">English</Select.Option>
-            </Select>
+            <div className="flex justify-end">
+              <Navbar
+                onClick1={() => changeLanguage("th")}
+                language1={"ไทย"}
+                language2={"English"}
+                onClick2={() => changeLanguage("en")}
+              />
+            </div>
 
             <div className=" flex flex-col items-end gap-2 mt-2">
               <Link to="/">

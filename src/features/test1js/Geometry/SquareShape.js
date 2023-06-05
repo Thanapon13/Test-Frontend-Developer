@@ -1,9 +1,13 @@
-export default function SquareShape({ shapes }) {
-  // console.log("shapes[0]", shapes);
+export default function SquareShape({ shape, onClickRandom }) {
+  // console.log("shape[0]", shape);
 
   return (
     <>
-      <div className="w-[100px] h-[100px] bg-gray-500" value={shapes}></div>
+      <div
+        className="w-[100px] h-[100px] bg-gray-500"
+        value={shape}
+        onClick={onClickRandom}
+      ></div>
     </>
   );
 }

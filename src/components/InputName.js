@@ -1,5 +1,5 @@
 import { Input } from "antd";
-export default function InputName({ onChange, placeholder, value }) {
+export default function InputName({ onChange, placeholder, value, style }) {
   return (
     <>
       <Input
@@ -7,6 +7,7 @@ export default function InputName({ onChange, placeholder, value }) {
         onChange={onChange}
         placeholder={placeholder}
         value={value}
+        style={style}
       />
     </>
   );

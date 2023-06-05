@@ -1,15 +1,8 @@
 import React from "react";
 import "flowbite";
 import { BiWorld } from "react-icons/bi";
-import { useTranslation } from "react-i18next";
 
-export default function NavBar() {
-  const { i18n } = useTranslation();
-
-  const changeLanguage = language => {
-    i18n.changeLanguage(language);
-  };
-
+export default function Navbar({ onClick1, onClick2, language1, language2 }) {
   return (
     <>
       <div className="flex items-center md:order-2">
@@ -27,20 +20,20 @@ export default function NavBar() {
           <ul className="py-2 font-medium" role="none">
             <li>
               <button
-                onClick={() => changeLanguage("th")}
+                onClick={onClick1}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                 role="menuitem"
               >
-                <div className="inline-flex items-center">ภาษาไทย</div>
+                <div className="inline-flex items-center">{language1}</div>
               </button>
             </li>
             <li>
               <button
-                onClick={() => changeLanguage("en")}
+                onClick={onClick2}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
                 role="menuitem"
               >
-                <div className="inline-flex items-center">English</div>
+                <div className="inline-flex items-center">{language2}</div>
               </button>
             </li>
           </ul>
